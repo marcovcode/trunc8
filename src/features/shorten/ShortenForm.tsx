@@ -19,6 +19,7 @@ function ShortenForm() {
             path,
             redirects as Tables<"redirects">[],
         );
+
         if (!isAvailable) onSubmit(formData); // don't know how to test this code, hope it works ;)
 
         // creating redirect
