@@ -18,7 +18,7 @@ function ShortenForm() {
                 {...register("url", {})}
             />
 
-            <button className="btn btn-primary">Shorten!</button>
+            <button className="btn btn-primary">Shorten</button>
         </form>
     );
 }
