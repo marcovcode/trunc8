@@ -1,11 +1,17 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useCreateRedirect } from "./useCreateRedirect";
+import { generateRandomString } from "../../utils/generateRandomString";
+
+const PATH_LENGTH = 4;
 
 function ShortenForm() {
     const { register, formState, handleSubmit } = useForm();
+    const { createRedirect, isPending } = useCreateRedirect();
 
     const onSubmit: SubmitHandler<FieldValues> = (formData) => {
+        const path = generateRandomString(PATH_LENGTH);
         const { url } = formData;
-        console.log(url);
+        createRedirect({ path, redirect: url });
     };
 
     return (
@@ -18,7 +24,13 @@ function ShortenForm() {
                 {...register("url", {})}
             />
 
-            <button className="btn btn-primary">Shorten</button>
+            <button className="btn btn-primary">
+                {isPending ? (
+                    <span className="loading loading-spinner loading-sm text-primary-content"></span>
+                ) : (
+                    "Shorten"
+                )}
+            </button>
         </form>
     );
 }
