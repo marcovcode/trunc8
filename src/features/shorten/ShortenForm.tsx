@@ -33,7 +33,6 @@ function ShortenForm() {
                 type="url"
                 className={`input input-bordered ${formState.errors.url && "input-error"}`}
                 placeholder="Enter an URL to shorten..."
-                value="http://ciao"
                 required
                 {...register("url", {})}
             />
