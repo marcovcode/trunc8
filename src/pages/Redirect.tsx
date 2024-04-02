@@ -20,6 +20,8 @@ function Redirect() {
             shortenedLinks as Tables<"shortened_links">[],
         )!;
         window.location.href = redirect;
+
+        return <FullPageSpinner />;
     } else {
         return <NotFound />;
     }
