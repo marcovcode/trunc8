@@ -13,7 +13,7 @@ function ShortenForm() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shortenedLink, setShortenedLink] = useState("");
 
-    const { register, formState, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();
     const { createShortenedLink, isPending } = useCreateShortenedLink();
     const { shortenedLinks } = useShortenedLinks();
 
@@ -80,7 +80,7 @@ function ShortenForm() {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <label
-                    className={`input input-bordered flex items-center gap-2 ${formState.errors.url && "input-error"}`}
+                    className={`input input-bordered flex items-center gap-2`}
                 >
                     <HiLink />
                     <input
