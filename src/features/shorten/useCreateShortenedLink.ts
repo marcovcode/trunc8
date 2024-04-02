@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { createRedirect as apiCreateRedirect } from "../../services/apiRedirects";
+import { createShortenedLink as apiCreateRedirect } from "../../services/apiShortenedLinks";
+
 import toast from "react-hot-toast";
 
 interface ParameterTypes {
@@ -7,13 +8,13 @@ interface ParameterTypes {
     redirect: string;
 }
 
-export function useCreateRedirect() {
-    const { mutate: createRedirect, isPending } = useMutation({
+export function useCreateShortenedLink() {
+    const { mutate: createShortenedLink, isPending } = useMutation({
         mutationFn: ({ path, redirect }: ParameterTypes) =>
             apiCreateRedirect(path, redirect),
         onError: () =>
             toast.error("An error occurred while creating your shortened link"),
     });
 
-    return { createRedirect, isPending };
+    return { createShortenedLink, isPending };
 }

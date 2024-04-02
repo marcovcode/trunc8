@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function AppLayout() {
     return (
-        <div className="font-rubik m-4">
+        <div className="mx-4 font-rubik">
             <Outlet />
         </div>
     );

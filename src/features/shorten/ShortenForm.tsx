@@ -1,7 +1,7 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useCreateRedirect } from "./useCreateRedirect";
+import { useCreateShortenedLink } from "./useCreateShortenedLink";
 import { generateRandomString } from "../../utils/generateRandomString";
-import { useRedirects } from "./useRedirects";
+import { useShortenedLinks } from "./useShortenedLinks";
 import { doesPathExist } from "../../utils/doesPathExist";
 import { Tables } from "../../types";
 import { useState } from "react";
@@ -9,25 +9,26 @@ import { useState } from "react";
 const PATH_LENGTH = 4;
 
 function ShortenForm() {
-    const { register, formState, handleSubmit } = useForm();
-    const { createRedirect, isPending } = useCreateRedirect();
-    const { redirects } = useRedirects();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shortenedLink, setShortenedLink] = useState("");
+
+    const { register, formState, handleSubmit } = useForm();
+    const { createShortenedLink, isPending } = useCreateShortenedLink();
+    const { shortenedLinks } = useShortenedLinks();
 
     const onSubmit: SubmitHandler<FieldValues> = (formData) => {
         // generating and checking path availability
         const path = generateRandomString(PATH_LENGTH);
         const isAvailable = !doesPathExist(
             path,
-            redirects as Tables<"redirects">[],
+            shortenedLinks as Tables<"shortened_links">[],
         );
 
         if (!isAvailable) onSubmit(formData); // don't know how to test this code, hope it works ;)
 
         // creating redirect
         const { url } = formData;
-        createRedirect(
+        createShortenedLink(
             { path, redirect: url },
             {
                 onSuccess: () => {
@@ -57,12 +58,14 @@ function ShortenForm() {
                     <h3 className="text-lg font-bold">
                         Your shortened link was created successfully!
                     </h3>
+
                     <p className="py-4">
                         Your shortened link is:{" "}
                         <a href={shortenedLink} className="link">
                             {shortenedLink}
                         </a>
                     </p>
+
                     <div className="modal-action">
                         <label className="btn" onClick={handleCloseForm}>
                             Close
@@ -85,7 +88,7 @@ function ShortenForm() {
 
                 <button className="btn btn-primary">
                     {isPending ? (
-                        <span className="loading loading-spinner loading-sm text-primary-content"></span>
+                        <span className="loading loading-spinner loading-sm"></span>
                     ) : (
                         "Shorten"
                     )}

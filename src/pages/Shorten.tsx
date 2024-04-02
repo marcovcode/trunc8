@@ -1,4 +1,4 @@
-import { useRedirects } from "../features/shorten/useRedirects";
+import { useShortenedLinks } from "../features/shorten/useShortenedLinks";
 
 import ShortenForm from "../features/shorten/ShortenForm";
 import ShortenTitle from "../features/shorten/ShortenTitle";
@@ -6,7 +6,7 @@ import FullPageCentered from "../ui/FullPageCentered";
 import FullPageSpinner from "../ui/FullPageSpinner";
 
 function Shorten() {
-    const { isLoading } = useRedirects();
+    const { isLoading } = useShortenedLinks();
 
     if (isLoading) return <FullPageSpinner />;
 
