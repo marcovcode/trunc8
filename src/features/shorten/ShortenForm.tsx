@@ -51,6 +51,7 @@ function ShortenForm() {
                 className="modal-toggle"
                 checked={isModalOpen}
             />
+
             <div className="modal" role="dialog">
                 <div className="modal-box">
                     <h3 className="text-lg font-bold">
