@@ -57,7 +57,7 @@ function ShortenForm() {
             <div className="modal" role="dialog">
                 <div className="modal-box">
                     <h3 className="text-lg font-bold">
-                        Your shortened link was created successfully!
+                        Shortened link created!
                     </h3>
 
                     <p className="py-4">
@@ -86,7 +86,7 @@ function ShortenForm() {
                     <input
                         type="url"
                         className="grow"
-                        placeholder="Enter an URL to shorten..."
+                        placeholder="Enter an URL..."
                         required
                         {...register("url", {})}
                     />
