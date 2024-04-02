@@ -2,7 +2,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useCreateRedirect } from "./useCreateRedirect";
 import { generateRandomString } from "../../utils/generateRandomString";
 import { useRedirects } from "./useRedirects";
-import { checkPathAvailability } from "../../utils/checkPathAvailability";
+import { doesPathExist } from "../../utils/doesPathExist";
 import { Tables } from "../../types";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ function ShortenForm() {
     const onSubmit: SubmitHandler<FieldValues> = (formData) => {
         // generating and checking path availability
         const path = generateRandomString(PATH_LENGTH);
-        const isAvailable = checkPathAvailability(
+        const isAvailable = !doesPathExist(
             path,
             redirects as Tables<"redirects">[],
         );
