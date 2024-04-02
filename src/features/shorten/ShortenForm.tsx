@@ -5,6 +5,7 @@ import { useShortenedLinks } from "./useShortenedLinks";
 import { doesPathExist } from "../../utils/doesPathExist";
 import { Tables } from "../../types";
 import { useState } from "react";
+import { HiLink } from "react-icons/hi2";
 
 const PATH_LENGTH = 4;
 
@@ -78,13 +79,18 @@ function ShortenForm() {
                 className="flex flex-col gap-4"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <input
-                    type="url"
-                    className={`input input-bordered ${formState.errors.url && "input-error"}`}
-                    placeholder="Enter an URL to shorten..."
-                    required
-                    {...register("url", {})}
-                />
+                <label
+                    className={`input input-bordered flex items-center gap-2 ${formState.errors.url && "input-error"}`}
+                >
+                    <HiLink />
+                    <input
+                        type="url"
+                        className="grow"
+                        placeholder="Enter an URL to shorten..."
+                        required
+                        {...register("url", {})}
+                    />
+                </label>
 
                 <button className="btn btn-primary">
                     {isPending ? (
